@@ -1,0 +1,37 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+main {
+  padding: 2rem;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  background-color: thistle;
+  padding: 2rem;
+}
+
+/* FORM  */
+
+form {
+  width: 80%;
+}
+select {
+  height: 3rem;
+}
+
+.custom-select-sm {
+  height: inherit;
+}
+
+.form-row {
+  margin-block-end: 2rem;
+}

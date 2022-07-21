@@ -1,0 +1,39 @@
+.groupForm.col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.groupForm > .question {
+  min-width: fit-content;
+}
+
+.group-container {
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: 10px;
+}
+
+section {
+  padding: 2rem;
+  margin-block-end: 2rem;
+}
+
+section.groups-list {
+  background-color: aquamarine;
+}
+section.add-group {
+  background-color: thistle;
+}
+
+section.add-codenames {
+  background-color: rgb(196, 180, 192);
+}
+section.codenames {
+  background-color: wheat;
+}
+
+.codename-container {
+  display: flex;
+  flex-direction: column;
+}

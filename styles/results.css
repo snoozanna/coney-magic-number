@@ -1,0 +1,13 @@
+.list-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-group-item > p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-group-item {
+  margin-block-end: 10px;
+}
