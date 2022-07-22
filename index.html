@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./styles/main.css">
 
   <!-- Our scripts -->
-  <script src="/scripts/form.js" type="module"></script>
+  <script src="/scripts/landing.js" type="module"></script>
   <title>The Magic Number</title>
 </head>
 
@@ -23,55 +23,19 @@
   <header>
     <h1>The Magic Number</h1>
 
+
   </header>
   <main>
     <!-- <form method="POST" action="https://us-central1-fir-ac2be.cloudfunctions.net/formReader" id="myForm"> -->
-    <form id="myForm">
-      What is your name?
-      <div class="form-row">
-
-        <div class="col">
-          <label for="firstName"></label>
-          <input type="text" class="form-control" placeholder="First name" id="firstName" name="firstName">
-        </div>
-        <div class="col">
-          <label for="firstName"></label>
-          <input type="text" class="form-control" placeholder="Last name" id="lastName" name="lastName">
-        </div>
-      </div>
-      Which group are you in?
+    <form id="codenameEntryForm">
+      What is your codename?
       <div class="form-row">
         <div class="col">
-          <label for="groupSelect"></label>
-          <select class="custom-select custom-select-sm" id="groupSelect" name="groupSelect">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+          <label for="codename"></label>
+          <input type="text" class="form-control" placeholder="codename" id="codenameInput" name="codenameQuery">
         </div>
       </div>
-      How do you feel on a scale of 1-10?
-      <div class="form-row">
-        <div class="col">
-          <label for="feel"></label>
-          <input type="range" class="form-control" placeholder="First name" id="feel" name="feel" min="0" max="10"
-            value="5" step="0.1">
-        </div>
-        <div class="col">
-          <div id="rangeMount"></div>
-        </div>
-      </div>
-      Why do you feel like that?
-      <div class="form-row">
-        <label for="reasonFeel"></label>
-        <textarea class="form-control" id="reasonFeel" rows="3" id="reasonFeel" name="reasonFeel"></textarea>
-
-      </div>
-      <div class="form-row">
-        <button type="reset">Reset</button>
-        <button>Submit</button>
-      </div>
+      <button>Submit</button>
     </form>
 
   </main>

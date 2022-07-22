@@ -12,6 +12,9 @@ import {
   updateDoc,
   onSnapshot,
   deleteDoc,
+  arrayUnion,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-lite.js";
 
 const { log, dir } = console;
@@ -87,26 +90,32 @@ export async function getOne(db, collectionName, docName) {
 
 // // TODO fix input to set the doc and change the
 
-export async function addResult(db, form) {
+export async function addResult(db, form, group, codename, nextPage) {
   const data = serialize(form);
   console.log("data inside setResult", data);
+  console.log("form", form);
+  const codenameRef = doc(db, "groups", group, codename, "results");
+
   try {
-    await addDoc(collection(db, "results"), {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      groupSelect: data.groupSelect,
-      feel: data.feel,
-      reasonFeel: data.reasonFeel,
-    }).then(() => {
-      // Reset the form values
-      form.reset();
-      alert("Your result has been successfully saved");
-    });
+    for (const item in data) {
+      await updateDoc(codenameRef, item, {
+        answer: data[item],
+      });
+    }
+    // .then(() => {
+    //   // Reset the form values
+    form.reset();
+    alert("Your result has been successfully saved");
+    setTimeout(() => {
+      window.location.href = `/${nextPage}.html`;
+    }, "1000");
   } catch (err) {
     alert("There was a problem saving your result");
     return Promise.reject(err.message);
   }
 }
+
+// }
 
 export function serialize(form) {
   // get most things
@@ -163,14 +172,28 @@ export const deleteOne = async (id = "", collectionName = "") => {
 
 export async function addCodename(db, form, group) {
   const data = serialize(form);
+  const groupRef = doc(db, `groups/${group}`);
+  const initialData = {
+    firstName: "",
+    lastName: "",
+    feel: "",
+    reasonFeel: "",
+  };
   const codename = data.codename;
   const codenameRef = collection(db, "groups", group, codename);
+  const resultsRef = doc(db, "groups", group, codename, "results");
   try {
     await addDoc(codenameRef, {
       codename: codename,
       claimed: false,
+    });
+    await setDoc(resultsRef, {
+      data: initialData,
     }).then(() => {
       // Reset the form values
+      updateDoc(groupRef, {
+        codenames: arrayUnion(codename),
+      });
       form.reset();
       alert("Your codename has been successfully saved");
     });
@@ -184,6 +207,7 @@ export async function addGroup(db, form, newGroupName) {
   const data = serialize(form);
   try {
     await setDoc(doc(db, "groups", newGroupName), {
+      codenames: [],
       groupName: newGroupName,
       dateCreated: new Date(),
     }).then(() => {
@@ -204,3 +228,50 @@ export async function addGroup(db, form, newGroupName) {
 // deleteCollection
 // addCodename
 // deleteCodename
+
+// QUERY CODENAME
+
+export const findCodename = async (codename, group) => {
+  console.log("trying to find codename:", codename, "in group:", group);
+  const groupData = await getOne(db, "groups", group);
+  const { codenames } = groupData;
+  if (codenames.includes(codename)) {
+    console.log(`codename ${codename} is present`);
+    window.localStorage.setItem("codename", codename);
+    window.localStorage.setItem("group", group);
+    // TODO change claimed to false
+    // const personData = await getCollection(db, `groups/${group}/${codename}`);
+    // await setDoc(personData[0], {
+    //   claimed: false,
+    // });
+    try {
+      // }).then(() => {
+      alert("Codename found!");
+      setTimeout(() => {
+        window.location.href = "/page1.html";
+      }, "1000");
+      return codename;
+    } catch (err) {
+      alert("There was a problem changing your claimed status");
+      return Promise.reject(err.message);
+    }
+  } else {
+    alert(`codename ${codename} doesn't exist - ask Toby`);
+  }
+};
+
+// READ RESULTS
+
+export const findResults = async (group, codename) => {
+  try {
+    const results = await getCollection(db, `groups/${group}/${codename}`);
+    console.log("Results", results);
+    // TODO find a better way of doing this
+
+    const myResults = results[1];
+    console.log("myResults", myResults);
+    return myResults;
+  } catch (err) {
+    return Promise.reject(err.message);
+  }
+};

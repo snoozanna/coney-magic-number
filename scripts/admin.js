@@ -7,6 +7,11 @@ import {
   addCodename,
 } from "./main.js";
 
+import {
+  getDoc,
+  doc,
+} from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-lite.js";
+
 const { log, dir } = console;
 
 // ADD A GROUP
@@ -37,11 +42,19 @@ const renderGroups = (groups) => {
       const groupText = `<div class="group-container" id="groupContainer"><p>${_id}</p></div>`;
       groupMount.innerHTML += groupText;
 
+      // TODO FIX DELETE
       const delBtn = document.createElement("button");
-      delBtn.innerText = `Delete ${_id}`;
+      delBtn.textContent = `Delete ${_id}`;
+
       delBtn.addEventListener("click", (e) => {
+        console.log("hi");
         e.preventDefault();
-        deleteOne(_id, "groups");
+        const consent = window.confirm(
+          "Are you sure you want to delete all the players?",
+        );
+        if (consent) {
+          deleteOne(_id, "groups");
+        }
       });
       groupMount.appendChild(delBtn);
     });
@@ -63,28 +76,27 @@ const renderCodenames = async (group) => {
 
   console.log("group to render", group);
   try {
-    const groupData = await getCollection(db, `groups/${group._id}/ben`);
-    console.log("groupData", groupData);
+    const groupRef = doc(db, `groups/${group}`);
+    const groupSnap = await getDoc(groupRef);
+    if (groupSnap.exists()) {
+      console.log("Document data:", groupSnap.data());
+      const data = groupSnap.data();
+      const codenameMount = document.getElementById("codenameMount");
+      codenameMount.innerHTML = `Groupname: ${data.groupName}`;
+      data.codenames.map((codename) => {
+        codenameMount.innerHTML += `<span>${codename}</span>`;
+      });
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
   } catch (err) {
     alert("There was a problem rendering your group");
     return Promise.reject(err.message);
   }
-
-  const codenameMount = document.getElementById("codenameMount");
-  codenameMount.innerHTML = `Groupname: ${group._id}`;
-  for (const codename in group) {
-    console.log("codename", codename);
-    codenameMount.innerHTML += `<span>${codename}</span>`;
-    // const delBtn = document.createElement("button");
-    // delBtn.innerText = `Delete ${codename}`;
-    // delBtn.addEventListener("click", (e) => {
-    //   e.preventDefault();
-    //   deleteOne(codename, "School");
-    // });
-    // codenameMount.appendChild(delBtn);
-  }
 };
 
+// renderCodenames("Group 4");
 // let group = "mygroup";
 // let groupData = await getCollection(db, "mygroup");
 // log("groupData", groupData);
@@ -106,12 +118,8 @@ groups.map((group) => {
   opt.textContent = group._id;
   opt.setAttribute("value", group._id);
   select.append(opt);
-  select.addEventListener("change", (e) => {
-    renderCodenames(group);
-  });
   return group;
 });
-
 // TODO FIX
 
 choicesMount.innerHTML = "";
@@ -122,6 +130,11 @@ lbl.textContent = "Choose your group";
 
 choicesMount.append(lbl);
 
+select.addEventListener("change", (e) => {
+  const group = e.target.value;
+  renderCodenames(group);
+});
+
 // ADD CODENAMES
 
 const codenameForm = document.forms["codenameForm"];
@@ -131,5 +144,10 @@ codenameForm.addEventListener("submit", (e) => {
   const codenameInput = document.getElementById("newCodenameInput");
   const newCodename = codenameInput.value;
   log(newCodename);
-  addCodename(db, codenameForm, "Group 1");
+  if (!select.value) {
+    alert("you need to select a group");
+  } else {
+    const group = select.value;
+    addCodename(db, codenameForm, group);
+  }
 });

@@ -13,55 +13,32 @@
   <!-- Our styles -->
   <link rel="stylesheet" href="./styles/generics.css">
   <link rel="stylesheet" href="./styles/main.css">
-  <link rel="stylesheet" href="./styles/admin.css">
 
   <!-- Our scripts -->
-  <script src="/scripts/admin.js" type="module"></script>
-  <title>Admin</title>
+  <script src="/scripts/page3.js" type="module"></script>
+  <title>The Magic Number</title>
 </head>
 
 <body>
   <header>
-    <h1>Admin</h1>
+    <h1>The Magic Number</h1>
+    <span id="myCodenameMount"></span>
   </header>
   <main>
-    <section class="groups-list">
-      <h2> Groups</h2>
-      <div id="groupListMount" class="groupListMount"></div>
-    </section>
-    <section class="add-group">
-      <h2>Add group</h2>
-      <form id="groupForm" class="groupForm">
-        <div class="form-row">
-          <div class="col groupForm">
-            <label for="groupName"></label>
-            <span class="question">Group Name:</span><input type="text" class="form-control" placeholder="Group name"
-              id="groupName" name="groupName">
-          </div>
-          <button>Add group</button>
-        </div>
-      </form>
-    </section>
-    <section class="codenames">
-      <h3>Codenames</h3>
-      Choose group
-      <div id="group-choices"></div>
-      <div id="codenameMount" class="codename-container">
+    <!-- <form method="POST" action="https://us-central1-fir-ac2be.cloudfunctions.net/formReader" id="myForm"> -->
+    <form id="p3Form">
+      <div id="prevAnswerMount" class="prevAnswer"></div>
+      <div class="form-row">
+        <label for="reasonFeel"></label>
+        <textarea class="form-control" id="reasonFeel" rows="3" id="reasonFeel" name="reasonFeel"></textarea>
+
       </div>
-    </section>
-    <section class="add-codenames">
-      <h2>Add codename</h2>
-      <form id="codenameForm" class="codenameForm">
-        <div class="form-row">
-          <div class="col codenameForm">
-            <label for="newCodename"></label>
-            <span class="question">Codename:</span><input type="text" class="form-control" placeholder="Codename"
-              id="newCodenameInput" name="codename">
-          </div>
-          <button>Add codename</button>
-        </div>
-      </form>
-    </section>
+      <div class="form-row">
+        <button type="reset">Reset</button>
+        <button>Submit</button>
+      </div>
+    </form>
+
   </main>
   <footer>
     <nav>
@@ -70,6 +47,9 @@
       <a href=" ./admin.html">Admin</a>
     </nav>
   </footer>
+
+
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

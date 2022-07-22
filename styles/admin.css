@@ -1,3 +1,8 @@
+.groupListMount {
+  display: flex;
+  flex-direction: row;
+}
+
 .groupForm.col {
   display: flex;
   justify-content: center;

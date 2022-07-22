@@ -35,3 +35,8 @@ select {
 .form-row {
   margin-block-end: 2rem;
 }
+
+.rangeInput {
+  text-align: center;
+  font-size: 5rem;
+}
