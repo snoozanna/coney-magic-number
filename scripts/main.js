@@ -74,7 +74,7 @@ export async function getOne(db, collectionName, docName) {
   try {
     const docSnap = await getDoc(messageDoc);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      // console.log("Document data:", docSnap.data());
       const messageList = docSnap.data();
       return messageList;
     } else {
@@ -268,8 +268,15 @@ export const findCodename = async (codename, group) => {
 export const findResults = async (group, codename) => {
   try {
     const results = await getCollection(db, `groups/${group}/${codename}`);
+    // console.log("results", results);
+    // console.log("results", JSON.stringify(results));
+    // console.log(results.includes("firstName"));
     // TODO find a better way of doing this
-    const myResults = results[0];
+    // const myResults = results[0];
+    const [myResults] = results.filter((element) => {
+      return element._id === "results";
+    });
+    console.log("myResults", myResults);
     return myResults;
   } catch (err) {
     return Promise.reject(err.message);
@@ -282,6 +289,5 @@ export const getDate = (unixTimestamp) => {
   const milliseconds = unixTimestamp * 1000;
   const dateObject = new Date(milliseconds);
   const humanDateFormat = dateObject.toLocaleString();
-  console.log(humanDateFormat);
   return humanDateFormat;
 };

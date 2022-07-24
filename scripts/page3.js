@@ -16,7 +16,7 @@ if (!myCodename) {
 const answers = await getOne(db, `groups/${myGroup}/${myCodename}`, "results");
 
 const { feel, reasonFeel } = answers;
-console.log("feel", feel, reasonFeel.answered);
+// console.log("feel", feel, reasonFeel.answered);
 
 const feelNumber = parseFloat(feel.answer, 10);
 // console.log(feelNumber - 1);
@@ -37,7 +37,7 @@ const getReasonFeelQ = (answered) => {
 };
 
 const getText = (feel, answered) => {
-  console.log("feee", feel);
+  // console.log("feee", feel);
   if (answered === true) {
     return `<p>Last time, said you were feeling ${feel.answer}</p>
     <p>Quick question, what has changed for you?</p>`;
@@ -56,7 +56,7 @@ feelReasonQMount.innerHTML = question;
 // SUBMIT
 
 const p3Form = document.forms["p3Form"];
-console.log("form", p3Form);
+// console.log("form", p3Form);
 
 p3Form.addEventListener("submit", (e) => {
   e.preventDefault();

@@ -1,6 +1,11 @@
+body {
+  background-color: antiquewhite;
+  color: black;
+}
+
 .groupListMount {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .groupForm.col {

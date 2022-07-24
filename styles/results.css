@@ -1,3 +1,8 @@
+body {
+  background-color: antiquewhite;
+  color: black;
+}
+
 .list-group {
   display: flex;
   flex-wrap: wrap;
@@ -10,4 +15,20 @@
 
 .list-group-item {
   margin-block-end: 10px;
+}
+
+.list-group-item.complete {
+  background-color: rgb(146, 201, 146);
+}
+
+.list-group-item.incomplete {
+  background-color: rgb(232, 183, 104);
+}
+
+.title-answer {
+  font-weight: 600;
+}
+
+span.answer {
+  color: purple;
 }

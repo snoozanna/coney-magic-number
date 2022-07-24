@@ -14,54 +14,8 @@ import {
 
 const { log, dir } = console;
 
-// ADD A GROUP
-const groupForm = document.forms["groupForm"];
-
-groupForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const nameInput = document.getElementById("groupName");
-  const newGroupName = nameInput.value;
-  addGroup(db, groupForm, newGroupName);
-});
-
-// DISPLAY GROUPS
-const groupMount = document.getElementById("groupListMount");
 const groups = await getCollection(db, "groups");
 console.log("groups", groups);
-
-// TODO fix no display
-const renderGroups = (groups) => {
-  // if (!groups?.length) {
-  //   const noDisplay = "No groups to display...";
-  //   groupMount.innerText = noDisplay;
-  // } else
-  if (groups != null && Array.isArray(groups)) {
-    groups.map((group) => {
-      // console.log(group._id);
-      const { _id } = group;
-      const groupText = `<div class="group-container" id="groupContainer"><p>${_id}</p></div>`;
-      groupMount.innerHTML += groupText;
-
-      // TODO FIX DELETE
-      const delBtn = document.createElement("button");
-      delBtn.textContent = `Delete ${_id}`;
-
-      delBtn.addEventListener("click", (e) => {
-        console.log("hi");
-        e.preventDefault();
-        const consent = window.confirm(
-          "Are you sure you want to delete all the players?",
-        );
-        if (consent) {
-          deleteOne(_id, "groups");
-        }
-      });
-      groupMount.appendChild(delBtn);
-    });
-  }
-};
-
-renderGroups(groups);
 
 //DISPLAY CODENAMES
 
@@ -82,9 +36,9 @@ const renderCodenames = async (group) => {
       console.log("Document data:", groupSnap.data());
       const data = groupSnap.data();
       const codenameMount = document.getElementById("codenameMount");
-      codenameMount.innerHTML = `Groupname: ${data.groupName}`;
+      codenameMount.innerHTML = `Groupname: ${data.groupName}. Codenames:`;
       data.codenames.map((codename) => {
-        codenameMount.innerHTML += `<span>${codename}</span>`;
+        codenameMount.innerHTML += ` ${codename}, `;
       });
     } else {
       // doc.data() will be undefined in this case
@@ -151,3 +105,56 @@ codenameForm.addEventListener("submit", (e) => {
     addCodename(db, codenameForm, group);
   }
 });
+
+// ADD A GROUP
+const groupForm = document.forms["groupForm"];
+
+groupForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const nameInput = document.getElementById("groupName");
+  const newGroupName = nameInput.value;
+  addGroup(db, groupForm, newGroupName);
+});
+
+// DISPLAY GROUPS
+const groupMount = document.getElementById("groupListMount");
+
+// TODO fix no display
+const renderGroups = (groups) => {
+  // if (!groups?.length) {
+  //   const noDisplay = "No groups to display...";
+  //   groupMount.innerText = noDisplay;
+  // } else
+  if (groups != null && Array.isArray(groups)) {
+    groups.map((group) => {
+      const { _id, codenames } = group;
+      let groupCodenames = [];
+      codenames.map((codename) => {
+        groupCodenames.push(codename);
+      });
+      // console.log(group._id);
+
+      console.log("codenames", codenames);
+      const groupText = `<div class="group-container" id="groupContainer"><p>${_id}</p><p>${groupCodenames}</p></div>`;
+      groupMount.innerHTML += groupText;
+
+      // TODO FIX DELETE
+      const delBtn = document.createElement("button");
+      delBtn.textContent = `Delete ${_id} TBC`;
+
+      delBtn.addEventListener("click", (e) => {
+        console.log("hi");
+        e.preventDefault();
+        const consent = window.confirm(
+          "Are you sure you want to delete all the players?",
+        );
+        if (consent) {
+          deleteOne(_id, "groups");
+        }
+      });
+      groupMount.appendChild(delBtn);
+    });
+  }
+};
+
+renderGroups(groups);

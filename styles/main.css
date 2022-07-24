@@ -2,6 +2,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: rgb(6, 2, 2);
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 500;
 }
 
 header {
