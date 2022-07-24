@@ -80,7 +80,7 @@ choicesMount.innerHTML = "";
 choicesMount.append(select);
 
 const lbl = document.createElement("label");
-lbl.textContent = "Choose your group";
+// lbl.textContent = "Choose your group";
 
 choicesMount.append(lbl);
 
@@ -107,14 +107,14 @@ codenameForm.addEventListener("submit", (e) => {
 });
 
 // ADD A GROUP
-const groupForm = document.forms["groupForm"];
+// const groupForm = document.forms["groupForm"];
 
-groupForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const nameInput = document.getElementById("groupName");
-  const newGroupName = nameInput.value;
-  addGroup(db, groupForm, newGroupName);
-});
+// groupForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   const nameInput = document.getElementById("groupName");
+//   const newGroupName = nameInput.value;
+//   addGroup(db, groupForm, newGroupName);
+// });
 
 // DISPLAY GROUPS
 const groupMount = document.getElementById("groupListMount");
@@ -139,20 +139,20 @@ const renderGroups = (groups) => {
       groupMount.innerHTML += groupText;
 
       // TODO FIX DELETE
-      const delBtn = document.createElement("button");
-      delBtn.textContent = `Delete ${_id} TBC`;
+      // const delBtn = document.createElement("button");
+      // delBtn.textContent = `Delete ${_id} TBC`;
 
-      delBtn.addEventListener("click", (e) => {
-        console.log("hi");
-        e.preventDefault();
-        const consent = window.confirm(
-          "Are you sure you want to delete all the players?",
-        );
-        if (consent) {
-          deleteOne(_id, "groups");
-        }
-      });
-      groupMount.appendChild(delBtn);
+      // delBtn.addEventListener("click", (e) => {
+      //   console.log("hi");
+      //   e.preventDefault();
+      //   const consent = window.confirm(
+      //     "Are you sure you want to delete all the players?",
+      //   );
+      //   if (consent) {
+      //     deleteOne(_id, "groups");
+      //   }
+      // });
+      // groupMount.appendChild(delBtn);
     });
   }
 };

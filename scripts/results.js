@@ -48,7 +48,7 @@ const renderResults = async (group) => {
     <p>Name: <span class="answer">${firstName.answer} ${lastName.answer}</span></p>
 
     <p>How do you feel on a scale of 1-10? <span class="answer">${feel.answer} </span></p>
-    <p>Why?  <span class="answer">${reasonFeel.answer}</span> </p>
+    <p>Why weren't you feeling 2 less?  <span class="answer">${reasonFeel.answer}</span> </p>
  
     <p>How do you feel on a scale of 1-10 now? <span class="answer">${feel2.answer}</span> </p>
     <p>What changed for you? <span class="answer">${reasonFeel2.answer}</span> </p></li>`;

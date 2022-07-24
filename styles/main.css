@@ -27,6 +27,7 @@ nav {
 
 form {
   width: 80%;
+  font: larger;
 }
 select {
   height: 3rem;
@@ -43,4 +44,39 @@ select {
 .rangeInput {
   text-align: center;
   font-size: 5rem;
+}
+
+.form-control {
+  font-size: inherit;
+}
+
+/* BUTTON */
+a {
+  color: #f2647d;
+}
+
+a:hover {
+  color: #fff;
+}
+
+button {
+  background-color: transparent;
+  border: #fff 1px solid;
+  border-radius: 3px;
+  color: #fff;
+}
+
+button:hover {
+  background-color: #cf1b98;
+  border: #fff 1px solid;
+  color: #fff;
+}
+
+@media screen and (max-width: 700px) {
+  #myCodenameMount > p {
+    text-align: right;
+  }
+  form {
+    width: 100%;
+  }
 }
