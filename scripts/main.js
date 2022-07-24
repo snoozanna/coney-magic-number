@@ -17,6 +17,8 @@ import {
   where,
 } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-lite.js";
 
+// require("dotenv").config();
+
 const { log, dir } = console;
 
 // TODO ADD .ENV
@@ -26,6 +28,7 @@ const { log, dir } = console;
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDAhJgAT7f1PfZGWv8QkU_Kg__U16mSRZU",
+  // apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "coney-magic-number.firebaseapp.com",
   projectId: "coney-magic-number",
   storageBucket: "coney-magic-number.appspot.com",
@@ -94,12 +97,14 @@ export async function addResult(db, form, group, codename, nextPage) {
   const data = serialize(form);
   console.log("data inside setResult", data);
   console.log("form", form);
-  const codenameRef = doc(db, "groups", group, codename, "results");
+  const resultsRef = doc(db, "groups", group, codename, "results");
 
   try {
     for (const item in data) {
-      await updateDoc(codenameRef, item, {
+      await updateDoc(resultsRef, item, {
         answer: data[item],
+        answered: true,
+        timestamp: new Date(),
       });
     }
     // .then(() => {
@@ -114,8 +119,6 @@ export async function addResult(db, form, group, codename, nextPage) {
     return Promise.reject(err.message);
   }
 }
-
-// }
 
 export function serialize(form) {
   // get most things
@@ -173,12 +176,6 @@ export const deleteOne = async (id = "", collectionName = "") => {
 export async function addCodename(db, form, group) {
   const data = serialize(form);
   const groupRef = doc(db, `groups/${group}`);
-  const initialData = {
-    firstName: "",
-    lastName: "",
-    feel: "",
-    reasonFeel: "",
-  };
   const codename = data.codename;
   const codenameRef = collection(db, "groups", group, codename);
   const resultsRef = doc(db, "groups", group, codename, "results");
@@ -188,7 +185,13 @@ export async function addCodename(db, form, group) {
       claimed: false,
     });
     await setDoc(resultsRef, {
-      data: initialData,
+      firstName: { answer: "" },
+      lastName: { answer: "" },
+      feel: { answer: "", answered: false },
+      // feel: { answer: "", reason: "" },
+      reasonFeel: { answer: "", answered: false },
+      feel2: { answer: "", answered: false },
+      reasonFeel2: { answer: "", answered: false },
     }).then(() => {
       // Reset the form values
       updateDoc(groupRef, {
@@ -265,13 +268,20 @@ export const findCodename = async (codename, group) => {
 export const findResults = async (group, codename) => {
   try {
     const results = await getCollection(db, `groups/${group}/${codename}`);
-    console.log("Results", results);
     // TODO find a better way of doing this
-
-    const myResults = results[1];
-    console.log("myResults", myResults);
+    const myResults = results[0];
     return myResults;
   } catch (err) {
     return Promise.reject(err.message);
   }
+};
+
+// CONVERTING TIMESTAMP
+
+export const getDate = (unixTimestamp) => {
+  const milliseconds = unixTimestamp * 1000;
+  const dateObject = new Date(milliseconds);
+  const humanDateFormat = dateObject.toLocaleString();
+  console.log(humanDateFormat);
+  return humanDateFormat;
 };

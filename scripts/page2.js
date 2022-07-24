@@ -1,4 +1,4 @@
-import { addResult, db } from "./main.js";
+import { addResult, db, getOne } from "./main.js";
 
 //display codename
 const myCodename = window.localStorage.getItem("codename");
@@ -12,6 +12,28 @@ if (!myCodename) {
   myCodenameMount.innerHTML = `<p>Codename: ${myCodename} </p>
   <p>Group: ${myGroup} </p>`;
 }
+
+// which feel to display
+const answers = await getOne(db, `groups/${myGroup}/${myCodename}`, "results");
+
+const { feel, reasonFeel } = answers;
+console.log("feel", feel);
+const feelQMount = document.getElementById("feelQMount");
+
+const getFeelQ = (answered) => {
+  if (answered === true) {
+    return ` <label for="feel"></label>
+          <input type="range" class="form-control" placeholder="Feel" id="feel" name="feel2" min="1" max="10"
+            value="5" step="0.1" >`;
+  } else if (answered === false) {
+    return ` <label for="feel"></label>
+          <input type="range" class="form-control" placeholder="Feel" id="feel" name="feel" min="1" max="10"
+            value="5" step="0.1" >`;
+  }
+};
+
+const text = getFeelQ(reasonFeel.answered);
+feelQMount.innerHTML = text;
 
 // range number display
 
