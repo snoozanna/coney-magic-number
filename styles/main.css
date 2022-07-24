@@ -27,7 +27,7 @@ nav {
 
 form {
   width: 80%;
-  font: larger;
+  font-size: larger;
 }
 select {
   height: 3rem;
