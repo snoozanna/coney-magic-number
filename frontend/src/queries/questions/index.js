@@ -5,7 +5,7 @@ const QUESTIONS_QUERY = gql`
     questions {
       data {
         attributes {
-          question
+          questionText
         }
       }
     }

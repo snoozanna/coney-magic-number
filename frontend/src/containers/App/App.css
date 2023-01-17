@@ -1,0 +1,19 @@
+body {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgb(250, 209, 246);
+}
+
+.App {
+  height: 100vh;
+  padding: 2rem;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

@@ -14,10 +14,7 @@ const SURVEY_QUERY = gql`
             data {
               id
               attributes {
-                question
-                a
-                b
-                c
+                questionText
               }
             }
           }

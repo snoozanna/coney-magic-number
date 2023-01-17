@@ -1,0 +1,14 @@
+.surveyResponseWrapper {
+  border: solid black 1px;
+  width: 50%;
+  margin: auto;
+  background: #ffa957;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.questionResponseWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

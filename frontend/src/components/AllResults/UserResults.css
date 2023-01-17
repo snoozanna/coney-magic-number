@@ -1,0 +1,23 @@
+.surveyResponseWrapper {
+  border: solid black 1px;
+  width: 50%;
+  margin: auto;
+  background: #ffa957;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.questionResponseWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.questionResponseWrapper > p {
+  font-weight: 600;
+}
+
+.questionResponseWrapper > p.question {
+  font-size: 1.2rem;
+  font-weight: 500;
+}

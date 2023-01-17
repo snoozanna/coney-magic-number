@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "responses",
+  "info": {
+    "singularName": "response",
+    "pluralName": "responses",
+    "displayName": "response",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "string"
+    },
+    "surveyQuestion": {
+      "type": "string"
+    },
+    "surveyResponse": {
+      "type": "string"
+    },
+    "question": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::question.question"
+    },
+    "survey": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::survey.survey"
+    }
+  }
+}

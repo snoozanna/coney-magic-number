@@ -1,0 +1,9 @@
+footer {
+  width: 100%;
+  padding: 1rem;
+}
+
+footer > nav > ul {
+  display: flex;
+  justify-content: space-between;
+}
