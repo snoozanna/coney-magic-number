@@ -15,6 +15,20 @@ const SURVEYS_QUERY = gql`
               id
               attributes {
                 questionText
+                options {
+                  __typename
+                  ... on ComponentOptionsMultiplechoice {
+                    a
+                    b
+                    c
+                  }
+                  ... on ComponentOptionsText {
+                    length
+                  }
+                  ... on ComponentOptionsSlider {
+                    max
+                  }
+                }
               }
             }
           }

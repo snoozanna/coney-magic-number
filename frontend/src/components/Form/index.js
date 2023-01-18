@@ -86,6 +86,7 @@ const Form = () => {
             const surveyId = surveys.data[0].id;
             const { name } = surveys.data[0].attributes;
             const questionsToAsk = surveys.data[0].attributes.questions.data;
+            console.log("questionsToAsk", questionsToAsk);
 
             return (
               <>
@@ -118,6 +119,15 @@ const Form = () => {
                           //  TODO - Add multiple choice and slider functionality
                           const questionText = question.attributes.questionText;
                           const questionId = question.id;
+                          const questionType =
+                            question.attributes.options[0].__typename;
+
+                          // TODO  If typename is multiple choice
+                          // map over options and list them
+                          //  If typename is Text
+                          //  Show long or short text input
+                          //   If typename is Slider
+                          //   Show slider with max number
 
                           return (
                             <div
@@ -127,12 +137,45 @@ const Form = () => {
                               <label htmlFor={`responses.${questionId}`}>
                                 {questionText}
                               </label>
-                              <input
-                                placeholder="your answer"
-                                {...register(`responses.${questionId}`, {
-                                  required: true,
-                                })}
-                              />
+
+                              {questionType === "ComponentOptionsText" ? (
+                                <input
+                                  placeholder="your answer"
+                                  {...register(`responses.${questionId}`, {
+                                    required: true,
+                                  })}
+                                />
+                              ) : questionType ===
+                                "ComponentOptionsMultiplechoice" ? (
+                                <select
+                                  {...register(`responses.${questionId}`, {
+                                    required: true,
+                                  })}
+                                >
+                                  <option
+                                    value={question.attributes.options[0].a}
+                                  >
+                                    {question.attributes.options[0].a}
+                                  </option>
+                                  <option
+                                    value={question.attributes.options[0].b}
+                                  >
+                                    {question.attributes.options[0].b}
+                                  </option>
+                                  <option
+                                    value={question.attributes.options[0].c}
+                                  >
+                                    {question.attributes.options[0].c}
+                                  </option>
+                                </select>
+                              ) : (
+                                <input
+                                  placeholder="your answer"
+                                  {...register(`responses.${questionId}`, {
+                                    required: true,
+                                  })}
+                                />
+                              )}
                             </div>
                           );
                         })}
