@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_options_texts",
+  "info": {
+    "displayName": "text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "length": {
+      "type": "enumeration",
+      "enum": [
+        "short",
+        "long"
+      ]
+    }
+  }
+}

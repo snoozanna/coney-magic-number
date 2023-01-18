@@ -14,6 +14,14 @@
   "attributes": {
     "questionText": {
       "type": "string"
+    },
+    "options": {
+      "type": "dynamiczone",
+      "components": [
+        "options.multiplechoice",
+        "options.text",
+        "options.slider"
+      ]
     }
   }
 }

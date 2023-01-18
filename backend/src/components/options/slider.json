@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_options_sliders",
+  "info": {
+    "displayName": "slider",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "max": {
+      "type": "integer"
+    }
+  }
+}

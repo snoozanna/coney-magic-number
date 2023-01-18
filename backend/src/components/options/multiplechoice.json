@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_options_multiplechoices",
+  "info": {
+    "displayName": "multiplechoice",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "a": {
+      "type": "string"
+    },
+    "b": {
+      "type": "string"
+    },
+    "c": {
+      "type": "string"
+    }
+  }
+}
