@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "codenames",
+  "info": {
+    "singularName": "codename",
+    "pluralName": "codenames",
+    "displayName": "codename",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "codename": {
+      "type": "string"
+    },
+    "surveys": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::survey.survey"
+    },
+    "confirmed": {
+      "type": "boolean"
+    },
+    "responses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::response.response"
+    }
+  }
+}
