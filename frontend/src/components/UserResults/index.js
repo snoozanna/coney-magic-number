@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import Query from "../../components/Query";
+import Submission from "../Submission/index.js";
 import RESPONSES_BY_EMAIL_QUERY from "../../queries/responseByEmail";
 import "./UserResults.css";
 
 const UserResults = ({ email }) => {
+  console.log("email", email);
   return (
     <>
       <Query query={RESPONSES_BY_EMAIL_QUERY} variables={{ email }}>
         {({ data: { responses } }) => {
           const responsesToShow = responses.data;
-          console.log("responses", responses);
+
           return (
             <>
-              <div className="surveyResponseWrapper">
+              <Submission responses={responses} />
+              {/* <div className="surveyResponseWrapper">
                 <h2>{email}</h2>
                 <p>
                   Completed:{" "}
@@ -40,7 +43,7 @@ const UserResults = ({ email }) => {
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </>
           );
         }}

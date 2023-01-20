@@ -1,0 +1,32 @@
+.submissionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.submissionWrapper {
+  border: solid black 1px;
+
+  margin: auto;
+  background: #6c4d9f;
+  border-radius: 5px;
+  padding: 1rem;
+  color: aliceblue;
+}
+
+.questionResponseWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.questionResponseWrapper > p {
+  font-weight: 600;
+}
+
+.questionResponseWrapper > p.question {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-inline-end: 1rem;
+}

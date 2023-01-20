@@ -3,14 +3,12 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router";
 import { useMutation } from "@apollo/client";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 import Footer from "../Footer";
-
+import Input from "../Input";
 import Query from "../../components/Query";
 import SURVEYS_QUERY from "../../queries/surveys/index.js";
-import QUESTIONS_QUERY from "./../../queries/questions/index.js";
+
 import RESPONSE_MUTATION from "../../mutations/responses";
 
 import "swiper/css";
@@ -43,6 +41,7 @@ const Form = () => {
   // Form - React Hook Forms functionality
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -116,67 +115,14 @@ const Form = () => {
                         </div>
 
                         {questionsToAsk.map((question) => {
-                          //  TODO - Add multiple choice and slider functionality
-                          const questionText = question.attributes.questionText;
                           const questionId = question.id;
-                          const questionType =
-                            question.attributes.options[0].__typename;
-
-                          // TODO  If typename is multiple choice
-                          // map over options and list them
-                          //  If typename is Text
-                          //  Show long or short text input
-                          //   If typename is Slider
-                          //   Show slider with max number
-
                           return (
-                            <div
-                              className="questionWrapper survey"
+                            <Input
+                              question={question}
+                              register={register}
                               key={questionId}
-                            >
-                              <label htmlFor={`responses.${questionId}`}>
-                                {questionText}
-                              </label>
-
-                              {questionType === "ComponentOptionsText" ? (
-                                <input
-                                  placeholder="your answer"
-                                  {...register(`responses.${questionId}`, {
-                                    required: true,
-                                  })}
-                                />
-                              ) : questionType ===
-                                "ComponentOptionsMultiplechoice" ? (
-                                <select
-                                  {...register(`responses.${questionId}`, {
-                                    required: true,
-                                  })}
-                                >
-                                  <option
-                                    value={question.attributes.options[0].a}
-                                  >
-                                    {question.attributes.options[0].a}
-                                  </option>
-                                  <option
-                                    value={question.attributes.options[0].b}
-                                  >
-                                    {question.attributes.options[0].b}
-                                  </option>
-                                  <option
-                                    value={question.attributes.options[0].c}
-                                  >
-                                    {question.attributes.options[0].c}
-                                  </option>
-                                </select>
-                              ) : (
-                                <input
-                                  placeholder="your answer"
-                                  {...register(`responses.${questionId}`, {
-                                    required: true,
-                                  })}
-                                />
-                              )}
-                            </div>
+                              watch={watch}
+                            />
                           );
                         })}
                       </div>

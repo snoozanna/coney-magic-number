@@ -12,6 +12,9 @@ const Footer = () => {
             <Link to="/form">Form</Link>
           </li>
           <li>
+            <Link to="/register">Register</Link>
+          </li>
+          <li>
             <Link to="/results">Results</Link>
           </li>
         </ul>

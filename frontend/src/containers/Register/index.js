@@ -7,9 +7,9 @@ import UserResults from "../../components/UserResults";
 
 import Footer from "../../components/Footer";
 
-import "./Results.css";
+import "./Register.css";
 
-const Results = () => {
+const Register = () => {
   // Show all Results
   // Show all results from one email address
   const [emails, setEmails] = useState([]);
@@ -51,23 +51,14 @@ const Results = () => {
   return (
     <>
       <main>
-        <h2>This is the Results page</h2>
-        <p> Look at results for email address:</p>
-        <div className="optionWrapper">
-          <select value={emailToShow} onChange={handleSelectChange}>
-            {" "}
-            {/* //set value here */}
-            {emails.map((email, inx) => {
-              return (
-                <option value={email} key={inx}>
-                  {email}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-
-        <UserResults email={emailToShow} />
+        <h2>Register</h2>
+        <p> Email addresses:</p>
+        <ul>
+          {/* //set value here */}
+          {emails.map((email, inx) => {
+            return <li key={inx}>{email}</li>;
+          })}
+        </ul>
 
         {/* <AllResults /> */}
       </main>
@@ -76,4 +67,4 @@ const Results = () => {
   );
 };
 
-export default Results;
+export default Register;

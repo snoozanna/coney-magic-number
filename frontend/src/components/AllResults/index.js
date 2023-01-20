@@ -11,14 +11,14 @@ const AllResults = () => {
       <Query query={RESPONSES_QUERY}>
         {({ data: { responses } }) => {
           const responsesToShow = responses.data;
-          console.log("responses", responses);
+          // console.log("responses", responses);
           return (
             <>
               {responsesToShow.map((response) => {
                 const { email, surveyResponse } = response.attributes;
                 const questionText =
                   response.attributes.question.data.attributes.questionText;
-                console.log(email, surveyResponse);
+                // console.log(email, surveyResponse);
                 return (
                   <>
                     <div className="responseWrapper">

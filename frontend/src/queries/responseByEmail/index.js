@@ -17,6 +17,7 @@ const RESPONSES_BY_EMAIL_QUERY = gql`
               id
             }
           }
+          publishedAt
           survey {
             data {
               id
