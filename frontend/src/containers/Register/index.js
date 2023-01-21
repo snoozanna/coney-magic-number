@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import Query from "../../components/Query";
+
 import RESPONSES_QUERY from "../../queries/responses";
-import UserResults from "../../components/UserResults";
+// import UserResults from "../../components/UserResults";
 // import AllResults from "../../components/AllResults";
 
 import Footer from "../../components/Footer";
@@ -39,11 +39,6 @@ const Register = () => {
     });
     // console.log("etp", emailsToPush);
     // setEmails((emails) => [...emails, emailsToPush]);
-  };
-
-  // Select which email to view the results of
-  const handleSelectChange = (event) => {
-    setEmailToShow(event.target.value);
   };
 
   if (loading) return "Loading...";

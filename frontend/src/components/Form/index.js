@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQuery } from "@apollo/client";
-import { useParams } from "react-router";
+
 import { useMutation } from "@apollo/client";
 
 import Footer from "../Footer";

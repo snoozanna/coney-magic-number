@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import Query from "../../components/Query";
+// import Query from "../../components/Query";
 import RESPONSES_QUERY from "../../queries/responses";
 import UserResults from "../../components/UserResults";
 // import AllResults from "../../components/AllResults";

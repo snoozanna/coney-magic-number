@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { useParams } from "react-router";
-import { useMutation } from "@apollo/client";
+
 import CODENAMES_QUERY from "../../queries/codenames";
 
 import Footer from "../../components/Footer";
-import Input from "../../components/Input";
+// import Input from "../../components/Input";
 import Query from "../../components/Query";
 
 import "./Entry.css";

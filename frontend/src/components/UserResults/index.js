@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useQuery } from "@apollo/client";
 import Query from "../../components/Query";
 import Submission from "../Submission/index.js";
 import RESPONSES_BY_EMAIL_QUERY from "../../queries/responseByEmail";
